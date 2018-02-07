@@ -20,11 +20,20 @@ const mountNode = document.getElementById('app');
    react-redux 提供 Provider 组件，
    被 Provider 组件包裹的整个 APP 中的每个组件，都可以通过 connect 去连接 store
 */
-ReactDOM.render(
-   <Provider store={store}>
-      <ConnectedRouter history={history} basename="">
-         <Root />
-      </ConnectedRouter>
-   </Provider>,
-   mountNode
-);
+
+const render = Component => {
+   ReactDOM.render(
+      <Provider store={store}>
+         <ConnectedRouter history={history} basename="">
+            <Component />
+         </ConnectedRouter>
+      </Provider>,
+      mountNode
+   );
+};
+
+render(Root);
+
+if (module.hot) {
+   module.hot.accept('./router/routes', () => render(require('./router/routes').default));
+}

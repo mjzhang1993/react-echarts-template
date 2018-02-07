@@ -1,27 +1,142 @@
 /* App 容器组件样式 */
 @import 'common';
 
+html {
+   box-sizing: border-box;
+}
+
+body {
+   -moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
+   text-rendering: optimizeLegibility;
+   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+      'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+   width: 100%;
+   height: 100%;
+}
+
+*,
+*:before,
+*:after {
+   box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+   outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+   cursor: pointer;
+   color: inherit;
+   text-decoration: none;
+}
+
 #app-container {
-   @include wh(4rem,5rem);
-   position: relative;
+   /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   text-align: center;
+   color: #2c3e50;
+   @include pa;
    @include flexv;
-   border: 0.01rem solid #666;
-   border-radius: 0.05rem;
-
-   .app-header {
-      width: 100%;
-      height: 0.5rem;
-      @include flexh;
-      border-bottom: 0.01rem solid #666;
-      font-size: 0.3rem;
-      color: #992828;
-   }
-
-   .app-body {
+}
+.header {
+   width: calc(100% - 20px);
+   height: 60px;
+   @include flexh;
+   font-size: 30px;
+   margin: 0px 10px;
+}
+.main {
+   flex-grow: 1;
+   width: 100%;
+   height: 0;
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+   position: relative;
+}
+.main-sidebar {
+   width: 200px;
+   height: 100%;
+}
+.main-charts-content {
+   width: 0;
+   flex-grow: 1;
+   height: 100%;
+   @include flexv;
+   .charts {
       width: 100%;
       height: 0;
       flex-grow: 1;
-      @include flexv;
-      overflow: hidden;
+   }
+}
+.main-header {
+   width: 100%;
+   height: 50px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   border-bottom: 1px solid #666;
+   border-top: 1px solid #666;
+   p {
+      width: 0;
+      flex-grow: 1;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      @include flexh;
+      font-size: 24px;
+   }
+   button {
+      @include flexh;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      outline: none;
+      margin-left: 10px;
+      font-size: 24px;
+      color: #666;
+      line-height: 0;
+      transform: rotate(180deg);
+      transition: all 0.1s ease-in-out;
+   }
+   .close {
+      transform: rotate(0deg);
+   }
+}
+
+.menu-container {
+   list-style: none;
+   padding: 10px 10px;
+   margin: 0;
+   background-color: #333;
+   overflow-y: auto;
+   li {
+      list-style: none;
+      background-color: #888;
+      height: 50px;
+      display: flex;
+      box-shadow: 0px 0px 20px rgba(238, 235, 235, 0.2);
+      margin: 10px 0px;
+      border-radius: 4px;
+      cursor: pointer;
+      transform: scale(1, 1);
+      transition: all 0.1s ease-in-out;
+      a {
+         display: flex;
+         color: #fff;
+         width: 100%;
+         height: 100%;
+         justify-content: center;
+         align-items: center;
+      }
+      &:hover {
+         transform: scale(1.05, 1.05);
+      }
    }
 }

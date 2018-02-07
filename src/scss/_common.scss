@@ -20,7 +20,7 @@ $bg: 1px solid green;
 }
 
 // 设置绝对定位并且位置信息
-@mixin pa ($t,$r,$b,$l) {
+@mixin pa ($t: 0, $r: 0, $b: 0, $l: 0) {
    position: absolute;
    top: $t;
    right: $r;
@@ -49,15 +49,4 @@ $bg: 1px solid green;
    justify-content: center;
    align-items: center;
    flex-direction: column;
-}
-
-// 设置背景图片
-@mixin bgimg ($url,$w,$h) {
-   background: url($url) norepeat center center;
-   background-size: $w $h;
-}
-
-@mixin bgimgpos ($url,$l,$t,$w,$h) {
-   background: url($url) norepeat $l $t;
-   background-size: $w $h;
 }

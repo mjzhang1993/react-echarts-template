@@ -10,8 +10,8 @@ class App extends Component {
       super(props);
    }
    render() {
-      return <AppCom>{this.props.children}</AppCom>;
+      return <AppCom routePaths={this.props.routePaths}>{this.props.children}</AppCom>;
    }
 }
 
-export default connect()(App);
+export default connect(state => ({ routePaths: state.charts.routePaths }))(App);

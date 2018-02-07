@@ -17,19 +17,6 @@
       <!--[if lte IE 11]>
          <script src="https://as.alipayobjects.com/g/component/??es6-shim/0.35.1/es6-sham.min.js,es6-shim/0.35.1/es6-shim.min.js"></script>
       <![endif]-->
-      <script>
-         var iScale = 1;
-         var userScal = window.devicePixelRatio;
-         iScale = iScale / userScal;
-         document.write('<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=' + iScale + ",minimum-scale=" + iScale + ",maximum-scale=" + iScale + '">');
-         var iWidth = document.documentElement.clientWidth;
-         // 用来设置 font-size 的 rem => px
-         if (iWidth / userScal >= 750) {
-            document.getElementsByTagName('html')[0].style.fontSize = 100 * userScal + 'px';
-         } else {
-            document.getElementsByTagName('html')[0].style.fontSize = iWidth * 100 / 375 + 'px';
-         }
-      </script>
    </head>
 
    <body>

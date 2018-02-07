@@ -3,32 +3,38 @@
 */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import SideBar from './SideBar';
 import '../../scss/app.scss';
 
-@withRouter
-export default class AppCom extends Component {
+class AppCom extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         name: 'etxt anem'
-      }
+         title: 'this is title'
+      };
    }
-   componentWillMount() {}
+   static defaultProps = {
+      routePaths: []
+   };
    render() {
-      const currentKey = this.props.location.pathname;
-      console.log(currentKey);
+      const { title } = this.state;
+      const { routePaths } = this.props;
 
       return (
          <div id="app-container">
-            <header className="app-header">成员列表</header>
-            <div className="app-body">
-               {this.props.children}
-               {/* <Link to="/test">点击进入 Test 页面</Link> */}
-               {/* Route 可以像正常组件一样写在这里 */}
-               {/* <Route path="/test" component={Test}/> */}
+            <header className="header">this is React-ECharts-Template</header>
+            <div className="main">
+               <SideBar className="main-sidebar" routePaths={routePaths} />
+               <div className="main-charts-content">
+                  <header className="main-header">
+                     <p>{title}</p>
+                  </header>
+                  <div className="charts">{this.props.children}</div>
+               </div>
             </div>
          </div>
       );
    }
 }
+
+export default withRouter(AppCom);
