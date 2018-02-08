@@ -13,7 +13,7 @@ html {
 body {
    @include wh100;
    font-family: Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', sans-self;
-   font-size: 0.14rem;
+   font-size: 14px;
    background: #fff;
 }
 li,
@@ -29,7 +29,7 @@ img {
    border: none;
 }
 button {
-   box-shadow: 0 0.06rem 0.16rem 0 rgba(0, 64, 133, 0.4);
+   box-shadow: 0 6px 16px 0 rgba(0, 64, 133, 0.4);
 }
 
 #app {

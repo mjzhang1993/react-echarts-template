@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SideBar from './SideBar';
-import '../../scss/app.scss';
+import './app.scss';
 
 class AppCom extends Component {
    constructor(props) {

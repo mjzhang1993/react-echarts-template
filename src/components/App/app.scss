@@ -1,38 +1,5 @@
 /* App 容器组件样式 */
-@import 'common';
-
-html {
-   box-sizing: border-box;
-}
-
-body {
-   -moz-osx-font-smoothing: grayscale;
-   -webkit-font-smoothing: antialiased;
-   text-rendering: optimizeLegibility;
-   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-      'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-   width: 100%;
-   height: 100%;
-}
-
-*,
-*:before,
-*:after {
-   box-sizing: inherit;
-}
-
-a:focus,
-a:active {
-   outline: none;
-}
-
-a,
-a:focus,
-a:hover {
-   cursor: pointer;
-   color: inherit;
-   text-decoration: none;
-}
+@import '../../scss/common';
 
 #app-container {
    /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */

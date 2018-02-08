@@ -45,7 +45,7 @@
    yarn run build --report
 ```
 
-#### 4. 运行本地开发服务器
+#### **4. 运行本地开发服务器** （开发时需要打开）
 
 ```bash
    yarn run server

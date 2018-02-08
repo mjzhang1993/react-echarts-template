@@ -6,9 +6,27 @@ const initialState = {
       {
          path: 'heatmap',
          name: '热力图'
+      },
+      {
+         path: 'map',
+         name: '地图'
+      },
+      {
+         path: 'parallel',
+         name: '平行坐标系'
+      },
+      {
+         path: 'graph',
+         name: '关系图'
       }
    ],
-   heatmap: [[]]
+   heatmap: [[]],
+   map: [],
+   parallel: [[]],
+   graph: {
+      nodes: [],
+      links: []
+   }
 };
 
 const typesCommands = {

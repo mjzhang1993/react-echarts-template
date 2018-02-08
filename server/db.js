@@ -12,9 +12,9 @@ module.exports = function() {
 
    const heatmap = (function() {
       const getArr = (end, start = 0) => Array.apply(null, Array(end - start)).map((v, i) => i + start);
-      const getValue = (x, y) => (x * x * y) % 20;
+      const getValue = (x, y) => (x * x * y * y) % 20;
 
-      const x = getArr(21);
+      const x = getArr(51);
       let data = [];
 
       x.map(xValue => {
@@ -28,7 +28,96 @@ module.exports = function() {
       return data;
    }());
 
+   const map = (function () {
+      const initialProvinces = Mock.mock({
+         'content|90': ['@province']
+      }).content;
+      const adapter = {
+         '黑龙': '黑龙江',
+         '内蒙': '内蒙古'
+      };
+      const data = [...new Set(initialProvinces)].map(p => {
+         const subP = p.substr(0, 2);
+         return {
+            name: adapter[subP] || subP,
+            value: Random.float(0, 1000, 2, 2)
+         };
+      });
+      
+      return data;
+   }());
+   
+   const parallel = (function () {
+      const provinces = Mock.mock({
+         'content|90': ['@province']
+      }).content;
+      const adapter = {
+         '黑龙': '黑龙江',
+         '内蒙': '内蒙古'
+      };
+      const getAge = () => Random.natural(10, 80);
+      const getGender = () => Math.random();
+      const getTotal = (single, count) => single * count;
+      const getSingle = () => Random.natural(100, 10000);
+      const getCount = () => Random.natural(1, 5);
+      const getPopulation = () => Random.natural(1000, 100000);
+      const data = [...new Set(provinces)].map(p => {
+         const subP = p.substr(0, 2);
+         const province  = adapter[subP] || subP;
+         const single = getSingle();
+         const count = getCount();
+         
+         return [
+            province,
+            getAge(),
+            getGender(),
+            single,
+            count,
+            getTotal(single, count),
+            getPopulation()
+         ];
+      });
+      
+      
+      return data;
+   }());
+   
+   const graph = (function () {
+      const notes = Mock.mock({
+         'content|200': [{
+            name: '@cname',
+            value: '@natural(0, 300)',
+            x: '@float(-500, 500)',
+            y: '@float(-500, 500)',
+            category: '@natural(0, 5)'
+         }]
+      }).content;
+      let links = [];
+      const linkNums = Random.natural(50, 100);
+      const getTargetIdx = function getTargetIdx(sourceIdx) {
+         let currentIdx = Random.natural(0, 200);
+         
+         return currentIdx === sourceIdx ? getTargetIdx(sourceIdx) : currentIdx;
+      };
+      
+      for (let i = 0; i < linkNums; i++) {
+         const sourceIdx = Random.natural(0, 200);
+         const targetIdx = getTargetIdx(sourceIdx);
+         const link = {
+            source: notes[sourceIdx].name,
+            target: notes[targetIdx].name,
+            value: Random.natural(0, 200)
+         };
+         links.push(link);
+      }
+      
+      return {notes, links};
+   }());
+   
    return {
-      heatmap
+      heatmap,
+      map,
+      parallel,
+      graph
    };
 };
