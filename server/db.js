@@ -83,35 +83,43 @@ module.exports = function() {
    }());
    
    const graph = (function () {
-      const notes = Mock.mock({
-         'content|200': [{
-            name: '@cname',
-            value: '@natural(0, 300)',
-            x: '@float(-500, 500)',
-            y: '@float(-500, 500)',
-            category: '@natural(0, 5)'
-         }]
-      }).content;
-      let links = [];
-      const linkNums = Random.natural(50, 100);
-      const getTargetIdx = function getTargetIdx(sourceIdx) {
-         let currentIdx = Random.natural(0, 200);
+      const names = Mock.mock({
+         'names|300': '@cfirst'
+      }).names;
+      const data = [...new Set(names)].map(name => {
+         return {
+            name,
+            value: Random.natural(0, 300),
+            x: Random.float(-500, 500),
+            y: Random.float(-500, 500),
+            category: Random.natural(0, 5)
+         }
+      });
+      function getIdx(initial, range) {
+         const idx = Random.natural(0, range);
+         if (initial !== idx) {
+            return idx;
+         }
          
-         return currentIdx === sourceIdx ? getTargetIdx(sourceIdx) : currentIdx;
-      };
+         return getIdx(initial, range)
+      }
+      const range = data.length - 1;
+      const linkNums = Random.natural(0, range * 2);
+      let links = [];
+      
       
       for (let i = 0; i < linkNums; i++) {
-         const sourceIdx = Random.natural(0, 200);
-         const targetIdx = getTargetIdx(sourceIdx);
+         const sourceIdx = Random.natural(0, range);
+         const targetIdx = getIdx(sourceIdx, range);
          const link = {
-            source: notes[sourceIdx].name,
-            target: notes[targetIdx].name,
+            source: sourceIdx,
+            target: targetIdx,
             value: Random.natural(0, 200)
          };
          links.push(link);
       }
       
-      return {notes, links};
+      return {data, links};
    }());
    
    return {

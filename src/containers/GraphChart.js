@@ -33,93 +33,58 @@ class GraphChart extends Component {
       return <Chart renderer={renderer} option={option} />;
    }
    getOption = () => {
-      // const currentData = this.props.charts.graph;
-     
+      const {data, links} = this.props.charts.graph;
       return {
+         legend: [
+            {
+               data: ['类目1', '类目2', '类目3', '类目4', '类目5', '类目6']
+            }
+         ],
          series: [
             {
                type: 'graph',
-               layout: 'none',
-               symbolSize: 50,
+               layout: 'force',
+               // symbolSize: 50,
                roam: true,
                label: {
-                  normal: {
-                     show: true
-                  }
+                  show: true
                },
-               edgeSymbol: ['circle', 'arrow'],
-               edgeSymbolSize: [4, 10],
+               force: {
+                  initLayout: 'circular'
+               },
+               draggable: true, // 节点可拖拽
+               focusNodeAdjacency: false, // 鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
+               edgeSymbol: ['none', 'none'], // 边两端标记
                edgeLabel: {
-                  normal: {
-                     textStyle: {
-                        fontSize: 20
-                     }
+                  show: false,
+                  position: 'middle',
+                  textStyle: {
+                     fontSize: 20
                   }
                },
-               data: [{
-                  name: '节点1',
-                  x: 300,
-                  y: 300
-               }, {
-                  name: '节点2',
-                  x: 800,
-                  y: 300
-               }, {
-                  name: '节点3',
-                  x: 550,
-                  y: 100
-               }, {
-                  name: '节点4',
-                  x: 550,
-                  y: 500
-               }],
-               // links: [],
-               links: [{
-                  source: 0,
-                  target: 1,
-                  symbolSize: [5, 20],
-                  label: {
-                     normal: {
-                        show: true
-                     }
-                  },
-                  lineStyle: {
-                     normal: {
-                        width: 5,
-                        curveness: 0.2
-                     }
-                  }
-               }, {
-                  source: '节点2',
-                  target: '节点1',
-                  label: {
-                     normal: {
-                        show: true
-                     }
-                  },
-                  lineStyle: {
-                     normal: { curveness: 0.2 }
-                  }
-               }, {
-                  source: '节点1',
-                  target: '节点3'
-               }, {
-                  source: '节点2',
-                  target: '节点3'
-               }, {
-                  source: '节点2',
-                  target: '节点4'
-               }, {
-                  source: '节点1',
-                  target: '节点4'
-               }],
-               lineStyle: {
-                  normal: {
-                     opacity: 0.9,
-                     width: 2,
-                     curveness: 0
-                  }
-               }
+               itemStyle: { // 图形样式
+                  shadowColor: 'rgba(0, 0, 0, 0.5)',
+                  shadowBlur: 10
+               },
+               lineStyle: { // 线条样式
+                  opacity: 0.9,
+                  width: 1,
+                  curveness: 0.2
+               },
+               label: { // 图形上文本
+                  color: '#eee',
+                  fontSize: 10
+               },
+               categories: [ // 节点分类的类目
+                  {name: '类目1', itemStyle: {color: '#C33332'}, label: {show: true}},
+                  {name: '类目2', itemStyle: {color: '#2F4553'}, label: {show: true}},
+                  {name: '类目3', itemStyle: {color: '#D58267'}, label: {show: true}},
+                  {name: '类目4', itemStyle: {color: '#73A085'}, label: {show: true}},
+                  {name: '类目5', itemStyle: {color: '#6E7074'}, label: {show: true}},
+                  {name: '类目6', itemStyle: {color: '#CB872E'}, label: {show: true}},
+               ],
+               data: data, // 节点数据
+               links: links // 连线数据
             }
          ]
       };

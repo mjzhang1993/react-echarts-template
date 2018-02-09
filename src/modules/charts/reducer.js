@@ -24,7 +24,7 @@ const initialState = {
    map: [],
    parallel: [[]],
    graph: {
-      nodes: [],
+      data: [],
       links: []
    }
 };
