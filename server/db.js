@@ -28,13 +28,13 @@ module.exports = function() {
       return data;
    }());
 
-   const map = (function () {
+   const map = (function() {
       const initialProvinces = Mock.mock({
          'content|90': ['@province']
       }).content;
       const adapter = {
-         '黑龙': '黑龙江',
-         '内蒙': '内蒙古'
+         黑龙: '黑龙江',
+         内蒙: '内蒙古'
       };
       const data = [...new Set(initialProvinces)].map(p => {
          const subP = p.substr(0, 2);
@@ -43,17 +43,17 @@ module.exports = function() {
             value: Random.float(0, 1000, 2, 2)
          };
       });
-      
+
       return data;
    }());
-   
-   const parallel = (function () {
+
+   const parallel = (function() {
       const provinces = Mock.mock({
          'content|90': ['@province']
       }).content;
       const adapter = {
-         '黑龙': '黑龙江',
-         '内蒙': '内蒙古'
+         黑龙: '黑龙江',
+         内蒙: '内蒙古'
       };
       const getAge = () => Random.natural(10, 80);
       const getGender = () => Math.random();
@@ -63,26 +63,17 @@ module.exports = function() {
       const getPopulation = () => Random.natural(1000, 100000);
       const data = [...new Set(provinces)].map(p => {
          const subP = p.substr(0, 2);
-         const province  = adapter[subP] || subP;
+         const province = adapter[subP] || subP;
          const single = getSingle();
          const count = getCount();
-         
-         return [
-            province,
-            getAge(),
-            getGender(),
-            single,
-            count,
-            getTotal(single, count),
-            getPopulation()
-         ];
+
+         return [province, getAge(), getGender(), single, count, getTotal(single, count), getPopulation()];
       });
-      
-      
+
       return data;
    }());
-   
-   const graph = (function () {
+
+   const graph = (function() {
       const names = Mock.mock({
          'names|300': '@cfirst'
       }).names;
@@ -93,21 +84,20 @@ module.exports = function() {
             x: Random.float(-500, 500),
             y: Random.float(-500, 500),
             category: Random.natural(0, 5)
-         }
+         };
       });
       function getIdx(initial, range) {
          const idx = Random.natural(0, range);
          if (initial !== idx) {
             return idx;
          }
-         
-         return getIdx(initial, range)
+
+         return getIdx(initial, range);
       }
       const range = data.length - 1;
       const linkNums = Random.natural(0, range * 2);
       let links = [];
-      
-      
+
       for (let i = 0; i < linkNums; i++) {
          const sourceIdx = Random.natural(0, range);
          const targetIdx = getIdx(sourceIdx, range);
@@ -118,10 +108,10 @@ module.exports = function() {
          };
          links.push(link);
       }
-      
-      return {data, links};
+
+      return { data, links };
    }());
-   
+
    return {
       heatmap,
       map,
